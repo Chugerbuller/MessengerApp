@@ -14,5 +14,6 @@ namespace MessengerApp.Model
         public Guid PersonID { get; set; }
 
         public Person Person { get; set; }
+        public List<Chat> Chats { get; set; }
     }
 }

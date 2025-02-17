@@ -9,6 +9,7 @@ namespace MessengerApp.Model
     public class Chat
     {
         public Guid Id { get; set; }
-        public string ChatName { get; set; }
+        public required string ChatName { get; set; }
+        public List<User>? Users { get; set; }
     }
 }

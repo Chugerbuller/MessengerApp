@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MessengerApp.DALL.Migrations
 {
     [DbContext(typeof(MessengerDbContext))]
-    [Migration("20250217172442_Initial")]
-    partial class Initial
+    [Migration("20250218162045_fixedSmth2")]
+    partial class fixedSmth2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace MessengerApp.DALL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("ChatUser", b =>
-                {
-                    b.Property<Guid>("ChatsId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ChatsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ChatUser");
-                });
 
             modelBuilder.Entity("MessengerApp.Model.Chat", b =>
                 {
@@ -55,7 +40,7 @@ namespace MessengerApp.DALL.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("MessengerApp.Model.Messege", b =>
+            modelBuilder.Entity("MessengerApp.Model.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,10 +52,10 @@ namespace MessengerApp.DALL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Messeges");
+                    b.ToTable("Message");
                 });
 
-            modelBuilder.Entity("MessengerApp.Model.MessengesInChat", b =>
+            modelBuilder.Entity("MessengerApp.Model.MessagesInChat", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,16 +64,16 @@ namespace MessengerApp.DALL.Migrations
                     b.Property<Guid>("ChatId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MessegeId")
+                    b.Property<Guid>("MessageId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
 
-                    b.HasIndex("MessegeId");
+                    b.HasIndex("MessageId");
 
-                    b.ToTable("MessengesInChats");
+                    b.ToTable("MessagesInChat");
                 });
 
             modelBuilder.Entity("MessengerApp.Model.Person", b =>
@@ -155,44 +140,29 @@ namespace MessengerApp.DALL.Migrations
                     b.ToTable("UsersInChats");
                 });
 
-            modelBuilder.Entity("ChatUser", b =>
-                {
-                    b.HasOne("MessengerApp.Model.Chat", null)
-                        .WithMany()
-                        .HasForeignKey("ChatsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MessengerApp.Model.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MessengerApp.Model.MessengesInChat", b =>
+            modelBuilder.Entity("MessengerApp.Model.MessagesInChat", b =>
                 {
                     b.HasOne("MessengerApp.Model.Chat", "Chat")
-                        .WithMany()
+                        .WithMany("MessagesInChats")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MessengerApp.Model.Messege", "Messege")
-                        .WithMany()
-                        .HasForeignKey("MessegeId")
+                    b.HasOne("MessengerApp.Model.Message", "Message")
+                        .WithMany("MessagesInChats")
+                        .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Chat");
 
-                    b.Navigation("Messege");
+                    b.Navigation("Message");
                 });
 
             modelBuilder.Entity("MessengerApp.Model.User", b =>
                 {
                     b.HasOne("MessengerApp.Model.Person", "Person")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("PersonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -203,13 +173,13 @@ namespace MessengerApp.DALL.Migrations
             modelBuilder.Entity("MessengerApp.Model.UsersInChat", b =>
                 {
                     b.HasOne("MessengerApp.Model.Chat", "Chat")
-                        .WithMany()
+                        .WithMany("UsersInChat")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MessengerApp.Model.User", "User")
-                        .WithMany()
+                        .WithMany("UsersInChat")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -217,6 +187,28 @@ namespace MessengerApp.DALL.Migrations
                     b.Navigation("Chat");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MessengerApp.Model.Chat", b =>
+                {
+                    b.Navigation("MessagesInChats");
+
+                    b.Navigation("UsersInChat");
+                });
+
+            modelBuilder.Entity("MessengerApp.Model.Message", b =>
+                {
+                    b.Navigation("MessagesInChats");
+                });
+
+            modelBuilder.Entity("MessengerApp.Model.Person", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MessengerApp.Model.User", b =>
+                {
+                    b.Navigation("UsersInChat");
                 });
 #pragma warning restore 612, 618
         }

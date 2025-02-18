@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MessengerApp.DALL
 {
-    public class MessengerAppContextFactory : IDesignTimeDbContextFactory<MessengerAppContext>
+    public class MessengerDbContextFactory : IDesignTimeDbContextFactory<MessengerDbContext>
     {
-        public MessengerAppContext CreateDbContext(string[] args)
+        public MessengerDbContext CreateDbContext(string[] args)
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -22,12 +22,12 @@ namespace MessengerApp.DALL
         var connectionString = config.GetConnectionString("ProductionConnection");
 #endif
 
-            return new MessengerAppContext(connectionString);
+            return new MessengerDbContext(connectionString);
         }
 
         private string[] args = [];
 
-        public MessengerAppContext CreateDbContext()
+        public MessengerDbContext CreateDbContext()
         {
             return CreateDbContext(args);
         }

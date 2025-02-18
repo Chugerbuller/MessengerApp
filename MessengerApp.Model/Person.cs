@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MessengerApp.Model;
 
-namespace MessengerApp.Model
+public class Person
 {
-    public class Person
-    {
-        public Guid Id { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-    }
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+    public List<User>? Users { get; set; }
+    public List<PersonsInChat>? UsersInChat { get; set; }
 }

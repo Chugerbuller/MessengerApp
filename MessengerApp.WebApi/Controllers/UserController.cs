@@ -1,4 +1,4 @@
-﻿using MessengerApp.DALL;
+using MessengerApp.DALL;
 using MessengerApp.Model;
 using MessengerApp.WebApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +35,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("create-user")]
-    public async Task<IActionResult> PostCreateUserAsync([FromBody] User newUser)
+    public async Task<IActionResult> CreateUserAsync([FromBody] User newUser)
     {
         var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Login == newUser.Login);
         if (user != null)

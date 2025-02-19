@@ -16,7 +16,7 @@ namespace MessengerApp.DALL
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Message { get; set; }
-        public DbSet<PersonsInChat> UsersInChats { get; set; }
+        public DbSet<PersonsInChat> PersonsInChat { get; set; }
         public DbSet<MessagesInChat> MessagesInChat { get; set; }
 
         public MessengerDbContext(string connectionString)

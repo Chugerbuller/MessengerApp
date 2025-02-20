@@ -1,4 +1,7 @@
 
+using MessengerApp.DALL;
+using MessengerApp.WebApi.Helpers;
+
 namespace MessengerApp.WebApi
 {
     public class Program
@@ -13,6 +16,9 @@ namespace MessengerApp.WebApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddTransient<MessengerDbContextFactory>();
+            builder.Services.AddTransient<HashHelper>();
+            builder.Services.AddTransient<LoginAndPasswordValidation>();
 
             var app = builder.Build();
 
@@ -24,10 +30,6 @@ namespace MessengerApp.WebApi
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

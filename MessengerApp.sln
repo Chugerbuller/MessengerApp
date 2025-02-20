@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.ViewModel", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.View", "MessengerApp.View\MessengerApp.View.csproj", "{CE13023B-A18D-453D-9D11-A557F59B9DA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.DALL", "MessengerApp.DALL\MessengerApp.DALL.csproj", "{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +33,10 @@ Global
 		{5726C917-BC6F-418F-8BF4-2043AD324F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5726C917-BC6F-418F-8BF4-2043AD324F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5726C917-BC6F-418F-8BF4-2043AD324F60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD222C70-564E-4C0D-B89B-F3F2D7AA3724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD222C70-564E-4C0D-B89B-F3F2D7AA3724}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD222C70-564E-4C0D-B89B-F3F2D7AA3724}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD222C70-564E-4C0D-B89B-F3F2D7AA3724}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE13023B-A18D-453D-9D11-A557F59B9DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE13023B-A18D-453D-9D11-A557F59B9DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE13023B-A18D-453D-9D11-A557F59B9DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE13023B-A18D-453D-9D11-A557F59B9DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

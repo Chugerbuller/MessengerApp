@@ -1,6 +1,5 @@
 ﻿using MessengerApp.DALL;
 using MessengerApp.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,7 @@ namespace MessengerApp.WebApi.Controllers
             _dbContext = dbContextFactory.CreateDbContext();
         }
         [HttpPost("add-message-in-chat")]
-        public async Task<IActionResult> PostMessageInChat([FromBody] (Chat chat, Message msg) msgInChat)
+        public async Task<IActionResult> PostMessageInChatAsync([FromBody] (Chat chat, Message msg) msgInChat)
         {
             var chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.Id == msgInChat.chat.Id);
 
@@ -37,6 +36,21 @@ namespace MessengerApp.WebApi.Controllers
             await _dbContext.SaveChangesAsync();
 
             return Ok(temp);
+        }
+        [HttpGet("get-all-msg/{chatId}")]
+        public async Task<IActionResult> GetAllMsgInChatAsync(Guid chatId)
+        {
+            var chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.Id == chatId);
+
+            if (chat == null)
+                return NotFound();
+
+            var res = await _dbContext.MessagesInChat.Where(ch => ch.Id == chatId).ToListAsync();
+
+            if (res == null)
+                return NotFound();
+
+            return Ok(res);
         }
     }
 }

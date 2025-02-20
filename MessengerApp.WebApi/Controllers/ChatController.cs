@@ -27,8 +27,9 @@ namespace MessengerApp.WebApi.Controllers
 
             return Ok(chat);
         }
+
         [HttpGet("get-all-chats/{userId}")]
-        public async Task<IActionResult> GetAllUserChats(Guid userId)
+        public async Task<IActionResult> GetAllUserChatsAsync(Guid userId)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -43,8 +44,10 @@ namespace MessengerApp.WebApi.Controllers
             return Ok(res);
         }
 
+        
+
         [HttpPost("update-chat-name/{chatId}/{chatNewName}")]
-        public async Task<IActionResult> PostUpdateChat(Guid chatId, string chatNewName)
+        public async Task<IActionResult> PostUpdateChatAsync(Guid chatId, string chatNewName)
         {
             var chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.Id == chatId);
 
@@ -56,8 +59,8 @@ namespace MessengerApp.WebApi.Controllers
             _dbContext.SaveChanges();
 
             return Ok(chat);
-
         }
+
         [HttpPost("create-chat")]
         public async Task<IActionResult> CreateChatAsync([FromBody] Chat chat)
         {
@@ -67,6 +70,7 @@ namespace MessengerApp.WebApi.Controllers
 
             return Ok(chat);
         }
+
         [HttpPost("add-person/{chatId}")]
         public async Task<IActionResult> AddPersonInChatAsync([FromBody] Person person, Guid chatId)
         {
@@ -86,18 +90,7 @@ namespace MessengerApp.WebApi.Controllers
 
             return Ok(chatWithPerson);
         }
-        [HttpDelete("delete-user-from-chat/{chatId}/{personId}")]
-        public async Task<IActionResult> DeletePersonFromChat(Guid chatId, Guid personId)
-        {
-            var chat = await _dbContext.PersonsInChat.FirstOrDefaultAsync(c => c.ChatId == chatId && c.PersonId == personId);
 
-            if (chat == null)
-                return NotFound();
-
-            _dbContext.PersonsInChat.Remove(chat);
-            await _dbContext.SaveChangesAsync();
-
-            return Ok();
-        }
+       
     }
 }

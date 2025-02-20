@@ -19,11 +19,16 @@ public class UserController : ControllerBase
         _dbContext = dbContextFactory.CreateDbContext();
         _hashHelper = hashHelper;
         _validation = validation;
+       
+        _dbContext.Users.Load();
+        _dbContext.Persons.Load();
+
     }
 
     [HttpGet("authorize-user/{login}/{password}")]
     public async Task<IActionResult> AuthorizeUser(string login, string password)
     {
+        
         var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Login == login);
 
         if (user == null)

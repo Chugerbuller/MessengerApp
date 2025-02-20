@@ -1,7 +1,8 @@
 
 using MessengerApp.DALL;
 using MessengerApp.WebApi.Helpers;
-using MessengerApp.WebApi.Hub;
+using MessengerApp.WebApi;
+using MessengerApp.WebApi.Hubs;
 
 namespace MessengerApp.WebApi
 {

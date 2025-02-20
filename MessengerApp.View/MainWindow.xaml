@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
         Title="Messenger" Height="640" Width="820"
-        Background="#FFE5B0">
+        Background="#8ce3ff">
     <Window.Resources>
         <Style x:Key="TextBlockBase">
             <Style.Setters>
                 <Setter Property="TextBlock.Padding" Value="5"/>
                 <Setter Property="TextBlock.Margin" Value="5" />
-                <Setter Property="TextBlock.Foreground" Value="#7396E8" />
+                <Setter Property="TextBlock.Foreground" Value="Black" />
                 <Setter Property="TextBlock.FontSize" Value="14" />
             </Style.Setters>
         </Style>
@@ -25,7 +25,7 @@
 
         <Style x:Key="MessageBorder">
             <Style.Setters>
-                <Setter Property="Border.Background" Value="#7396E8" />
+                <Setter Property="Border.Background" Value="#8ce3ff" />
                 <Setter Property="Border.CornerRadius" Value="13" />
                 <Setter Property="Border.MinWidth" Value="100" />
                 <Setter Property="Border.MaxWidth" Value="300" />
@@ -41,10 +41,10 @@
         <Style x:Key="ButtonMenu">
             <Style.Setters>
                 <Setter Property="Button.Margin" Value="5" />
-                <Setter Property="Button.Background" Value="#FFE5B0" />
+                <Setter Property="Button.Background" Value="#8ce3ff" />
                 <Setter Property="Button.FontSize" Value="14"/>
                 <Setter Property="Button.FontFamily" Value="Tahoma"/>
-                <Setter Property="Button.BorderBrush" Value="#FFE5B0"/>
+                <Setter Property="Button.BorderBrush" Value="#8ce3ff"/>
                 <Setter Property="Button.BorderThickness" Value="2"/>
             </Style.Setters>
         </Style>
@@ -60,7 +60,7 @@
         <Style x:Key="Label">
             <Style.Setters>
                 <Setter Property="Label.Margin" Value="5"/>
-                <Setter Property="Label.Background" Value="#FFE5B0"/>
+                <Setter Property="Label.Background" Value="#8ce3ff"/>
                 <Setter Property="Label.FontSize" Value="13"/>
                 <Setter Property="Label.FontFamily" Value="Tahoma"/>
             </Style.Setters>
@@ -68,10 +68,10 @@
         <Style x:Key="ButtonMessage">
             <Style.Setters>
                 <Setter Property="Button.Margin" Value="5" />
-                <Setter Property="Button.Background" Value="#FFE5B0" />
+                <Setter Property="Button.Background" Value="#ffd2c4" />
                 <Setter Property="Button.FontSize" Value="13"/>
                 <Setter Property="Button.FontFamily" Value="Tahoma"/>
-                <Setter Property="Button.BorderBrush" Value="#FFE5B0"/>
+                <Setter Property="Button.BorderBrush" Value="#ffd2c4"/>
                 <Setter Property="Button.BorderThickness" Value="2"/>
             </Style.Setters>
         </Style>

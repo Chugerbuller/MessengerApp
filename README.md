@@ -17,7 +17,7 @@
 
 * Messeges
 
-  id(Guid) | Content(TEXT)  | SenderId(Guid) | SendDateAndTime(DateTime)
+  id(Guid) | Content(TEXT)  | SenderId(Guid) | Created(DateTime)
   -- | -- | -- | --
 
 ## __Таблицы связей в бд__

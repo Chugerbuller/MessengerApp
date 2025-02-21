@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="350" Width="500">
+        Title="LoginWindow" Height="280" Width="420">
     <Window.Resources>
         <Style x:Key="Screen">
             <Style.Setters>
@@ -65,24 +65,18 @@
                 <Setter Property="Button.Background" Value="#2E88A6" />
                 <Setter Property="Button.Foreground" Value="#8ce3ff" />
                 <Setter Property="Button.Margin" Value="5"/>
-                <Setter Property="Button.Padding" Value="50 10"/>
+                <Setter Property="Button.Padding" Value="40 10"/>
                 <Setter Property="Button.HorizontalAlignment" Value="Center" />
                 <Setter Property="Button.FontSize" Value="14" />
                 <Setter Property="Button.BorderBrush" Value="#2E88A6" />
                 <Setter Property="Button.BorderThickness" Value="2" />
             </Style.Setters>
         </Style>
-        <Style x:Key="WarningBlock" BasedOn="{StaticResource TextBlockBase}">
-            <Style.Setters>
-                <Setter Property="TextBlock.Foreground" Value="Red" />
-                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
-            </Style.Setters>
-        </Style>
     </Window.Resources>
-            <Grid>
-        <Border Style="{StaticResource Screen}" Name="LoginScreen" Visibility="Visible">
+    <Grid>
+        <Border Style="{StaticResource Screen}" Name="LoginScreen" Visibility="Visible" Height="269" VerticalAlignment="Center">
             <StackPanel Style="{StaticResource LoginPanel}">
-                <TextBlock Text="Sign in" Style="{StaticResource HeaderBlock}" />
+                <TextBlock Text="Sign In" Style="{StaticResource HeaderBlock}" />
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="UserName" Style="{StaticResource LabelTextBlock}" />
                     <TextBox Style="{StaticResource TextBoxBase}" Name="LoginBox" />
@@ -91,11 +85,8 @@
                     <TextBlock Text="Password" Style="{StaticResource LabelTextBlock}" />
                     <PasswordBox Style="{StaticResource TextBoxBase}" Name="LoginPasswordBox"/>
                 </DockPanel>
-                
                 <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="LoginButton"/>
-                <TextBlock Text="No account? Register!" Style="{StaticResource SubscriptTextBlock}" />
-                <TextBlock Text="" Name="LoginMessageBlock" Style="{StaticResource WarningBlock}"
-                           MouseDown="TextBlock_MouseDown" Visibility="Hidden"/>
+                <TextBlock Text="No account? Register!" Style="{StaticResource SubscriptTextBlock}" MouseDown="TextBlock_MouseDown"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -33,13 +33,14 @@
         </Style>
         <Style x:Key="TextBlockBase">
             <Style.Setters>
-                <Setter Property="TextBlock.Padding" Value="10"/>
+                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
                 <Setter Property="TextBlock.Foreground" Value="#2E88A6" />
                 <Setter Property="TextBlock.FontSize" Value="14" />
             </Style.Setters>
         </Style>
-        <Style x:Key="HeaderBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Style x:Key="HeaderBlock">
             <Style.Setters>
+                <Setter Property="TextBlock.Foreground" Value="#2E88A6" />
                 <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
                 <Setter Property="TextBlock.FontWeight" Value="Bold" />
                 <Setter Property="TextBlock.FontSize" Value="18"/>
@@ -59,23 +60,16 @@
                 <Setter Property="Button.Background" Value="#2E88A6" />
                 <Setter Property="Button.Foreground" Value="#8ce3ff" />
                 <Setter Property="Button.Margin" Value="10"/>
-                <Setter Property="Button.Padding" Value="50, 10"/>
+                <Setter Property="Button.Padding" Value="40, 10"/>
                 <Setter Property="Button.HorizontalAlignment" Value="Center" />
                 <Setter Property="Button.FontSize" Value="14" />
                 <Setter Property="Button.BorderBrush" Value="#2E88A6" />
                 <Setter Property="Button.BorderThickness" Value="2" />
             </Style.Setters>
         </Style>
-        <Style x:Key="WarningBlock" BasedOn="{StaticResource TextBlockBase}">
-            <Style.Setters>
-                <Setter Property="TextBlock.Foreground" Value="Red" />
-                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
-            </Style.Setters>
-        </Style>
     </Window.Resources>
     <Grid>
         <Border Style="{StaticResource Screen}" Name="RegisterScreen" Visibility="Visible">
-            
             <StackPanel Style="{StaticResource RegisterPanel}">
                 <TextBlock Text="Registration" Style="{StaticResource HeaderBlock}" />
                 <DockPanel HorizontalAlignment="Center">
@@ -94,10 +88,7 @@
                     <TextBlock Text="Password" Style="{StaticResource SubscriptTextBlock}" />
                     <PasswordBox Style="{StaticResource TextBoxBase}" Name="RegisterPasswordBox"/>
                 </DockPanel>
-               
                 <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="RegisterButton"/>
-                <TextBlock Text="" Name="RegisterMessageBlock" Style="{StaticResource WarningBlock}"
-                           MouseDown="TextBlock_MouseDown" Visibility="Hidden"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
+using MessengerApp.ViewModel.LoginAndRegistration;
 namespace MessengerApp.View
 {
     /// <summary>
@@ -22,6 +11,14 @@ namespace MessengerApp.View
         public LoginWindow()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            RegistrationWindow registrationWindow = new RegistrationWindow();
+            this.Close();
+            registrationWindow.ShowDialog();
         }
     }
 }

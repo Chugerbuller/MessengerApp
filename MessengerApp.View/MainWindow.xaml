@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
-        Title="Messenger" Height="640" Width="820"
+        Title="Messenger" Height="640" Width="830"
         Background="#8ce3ff">
     <Window.Resources>
         <Style x:Key="TextBlockBase">
@@ -42,6 +42,7 @@
             <Style.Setters>
                 <Setter Property="Button.Margin" Value="5" />
                 <Setter Property="Button.Background" Value="#8ce3ff" />
+                <Setter Property="Button.Foreground" Value="#2E88A6" />
                 <Setter Property="Button.FontSize" Value="14"/>
                 <Setter Property="Button.FontFamily" Value="Tahoma"/>
                 <Setter Property="Button.BorderBrush" Value="#8ce3ff"/>
@@ -52,6 +53,7 @@
             <Style.Setters>
                 <Setter Property="TextBlock.Padding" Value="5"/>
                 <Setter Property="TextBlock.Margin" Value="5" />
+                <Setter Property="TextBlock.Foreground" Value="#2E88A6"/>
                 <Setter Property="TextBlock.FontFamily" Value="Tahoma"/>
                 <Setter Property="TextBlock.FontSize" Value="14" />
                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
@@ -61,17 +63,19 @@
             <Style.Setters>
                 <Setter Property="Label.Margin" Value="5"/>
                 <Setter Property="Label.Background" Value="#8ce3ff"/>
+                <Setter Property="Label.Foreground" Value="#2E88A6"/>
                 <Setter Property="Label.FontSize" Value="13"/>
                 <Setter Property="Label.FontFamily" Value="Tahoma"/>
             </Style.Setters>
         </Style>
         <Style x:Key="ButtonMessage">
             <Style.Setters>
-                <Setter Property="Button.Margin" Value="5" />
-                <Setter Property="Button.Background" Value="#ffd2c4" />
+                <Setter Property="Button.Margin" Value="10" />
+                <Setter Property="Button.Background" Value="#2E88A6" />
+                <Setter Property="Button.Foreground" Value="#8ce3ff" />
                 <Setter Property="Button.FontSize" Value="13"/>
                 <Setter Property="Button.FontFamily" Value="Tahoma"/>
-                <Setter Property="Button.BorderBrush" Value="#ffd2c4"/>
+                <Setter Property="Button.BorderBrush" Value="#2E88A6"/>
                 <Setter Property="Button.BorderThickness" Value="2"/>
             </Style.Setters>
         </Style>
@@ -81,7 +85,7 @@
                 <Setter Property="TextBox.Padding" Value="5"/>
                 <Setter Property="TextBox.FontSize" Value="13"/>
                 <Setter Property="TextBox.FontFamily" Value="Tahoma"/>
-                <Setter Property="TextBox.BorderBrush" Value="#FFE5B0"/>
+                <Setter Property="TextBox.BorderBrush" Value="White"/>
                 <Setter Property="TextBox.BorderThickness" Value="2"/>
             </Style.Setters>
         </Style>

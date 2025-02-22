@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\MessengerApp.ViewModel\LoginAndRegistration\LoginViewModel.cs" Link="LoginViewModel.cs" />
-    <Compile Include="..\MessengerApp.ViewModel\LoginAndRegistration\RegistrationViewModel.cs" Link="RegistrationViewModel.cs" />
-    <Compile Include="..\MessengerApp.ViewModel\MainViewModel.cs" Link="MainViewModel.cs" />
+    <ProjectReference Include="..\MessengerApp.ViewModel\MessengerApp.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

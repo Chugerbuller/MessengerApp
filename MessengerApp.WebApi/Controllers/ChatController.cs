@@ -71,12 +71,17 @@ namespace MessengerApp.WebApi.Controllers
             return Ok(chat);
         }
 
-        [HttpPost("add-person/{chatId}")]
-        public async Task<IActionResult> AddPersonInChatAsync([FromBody] Person person, Guid chatId)
+        [HttpPost("add-person/{chatId}/{personId}")]
+        public async Task<IActionResult> AddPersonInChatAsync(Guid chatId, Guid personId)
         {
             var chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.Id == chatId);
 
             if (chat == null)
+                return NotFound();
+
+            var person = await _dbContext.Persons.FirstOrDefaultAsync(p => p.Id == personId);
+
+            if (person == null)
                 return NotFound();
 
             var chatWithPerson = new PersonsInChat

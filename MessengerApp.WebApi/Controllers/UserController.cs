@@ -27,8 +27,7 @@ public class UserController : ControllerBase
 
     [HttpGet("authorize-user/{login}/{password}")]
     public async Task<IActionResult> AuthorizeUser(string login, string password)
-    {
-        
+    { 
         var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Login == login);
 
         if (user == null)

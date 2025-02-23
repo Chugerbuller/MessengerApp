@@ -3,7 +3,6 @@ using MessengerApp.Model;
 using MessengerApp.WebApi.Helpers;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 
 namespace MessengerApp.WebApi.Hubs;
 

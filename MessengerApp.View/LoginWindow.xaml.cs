@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using MessengerApp.ViewModel;
 using MessengerApp.ViewModel.LoginAndRegistration;
 namespace MessengerApp.View
 {
@@ -8,17 +10,30 @@ namespace MessengerApp.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public Context _context;
+        public LoginWindow(Context context)
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            _context = context;
+            DataContext = new LoginViewModel(_context);
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            RegistrationWindow registrationWindow = new RegistrationWindow();
+            RegistrationWindow registrationWindow = new RegistrationWindow(_context);
             this.Close();
             registrationWindow.ShowDialog();
+
+            if (registrationWindow.DialogResult == true)
+            {
+                MainWindow mainWindow = new MainWindow(_context);
+                mainWindow.Show();
+            }
         }
+        void PasswordChangedHandler(Object sender, RoutedEventArgs args)
+        {
+            _context.AutorizedUser.Password = ((PasswordBox)sender).Password;
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection.Metadata;
 using System.Text;
@@ -9,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace MessengerApp.ViewModel.Utils
 {
-    public class ApiService
+    public class ApiServiceLoginAndAuthorize
     {
         private readonly HttpClient _httpClient;
-        public ApiService()
+        public ApiServiceLoginAndAuthorize()
         {
             _httpClient = new HttpClient()
             {
-                BaseAddress = new Uri("")
+                BaseAddress = new Uri("https://localhost:7259/messenger")
             };
         }
 
@@ -25,8 +26,13 @@ namespace MessengerApp.ViewModel.Utils
             HttpResponseMessage responce = await _httpClient.GetAsync($"autorize-user/{login}/{password}");
             
             if(responce.IsSuccessStatusCode)
-            { 
-                return await responce.Content.ReadFromJsonAsync<User>();
+            {
+                var user = await responce.Content.ReadFromJsonAsync<User>();
+                if(user == null)
+                {
+                    throw new Exception("Не удалось авторизоваться!");
+                }
+                return user;
             }
             else
             {
@@ -39,7 +45,12 @@ namespace MessengerApp.ViewModel.Utils
             HttpResponseMessage responce = await _httpClient.PostAsJsonAsync($"create-user", newUser);
             if(responce.IsSuccessStatusCode)
             {
-                return await responce.Content.ReadFromJsonAsync<User>();
+                var user = await responce.Content.ReadFromJsonAsync<User>();
+                if (user == null)
+                {
+                    throw new Exception("Не удалось зарегистрироваться!");
+                }
+                return user;
             }
             else
             {

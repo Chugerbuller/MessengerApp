@@ -79,13 +79,14 @@
                 <TextBlock Text="Sign In" Style="{StaticResource HeaderBlock}" />
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="UserName" Style="{StaticResource LabelTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="LoginBox" />
+                    <TextBox Style="{StaticResource TextBoxBase}" Name="LoginTextBox" Text="{Binding login}" />
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="Password" Style="{StaticResource LabelTextBlock}" />
-                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="LoginPasswordBox"/>
+                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="LoginPasswordBox" PasswordChanged="PasswordChangedHandler"/>
                 </DockPanel>
-                <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="LoginButton"/>
+                <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="LoginButton"
+                        Command="{Binding LoginCommand}"/>
                 <TextBlock Text="No account? Register!" Style="{StaticResource SubscriptTextBlock}" MouseDown="TextBlock_MouseDown"/>
             </StackPanel>
         </Border>

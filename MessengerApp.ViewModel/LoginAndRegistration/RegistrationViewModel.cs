@@ -10,8 +10,18 @@ namespace MessengerApp.ViewModel.LoginAndRegistration
 {
     public class RegistrationViewModel : ReactiveObject
     {
+        public Context _context;
         public ReactiveCommand<Unit, Unit> RegisterCommand { get; }
 
+        public RegistrationViewModel(Context context)
+        {
+            _context = context;
+            RegisterCommand = ReactiveCommand.CreateFromTask(Registration);
+        }
 
+        private async Task Registration()
+        {
+
+        }
     }
 }

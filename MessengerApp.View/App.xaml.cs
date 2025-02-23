@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using MessengerApp.ViewModel;
 
 namespace MessengerApp.View;
 
@@ -9,15 +10,16 @@ namespace MessengerApp.View;
 /// </summary>
 public partial class App : Application
 {
+    public Context context = new Context();
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        LoginWindow loginWindow = new LoginWindow();
+        LoginWindow loginWindow = new LoginWindow(context);
         loginWindow.ShowDialog();
 
         if (loginWindow.DialogResult == true)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(context);
             mainWindow.Show();
         }
     }

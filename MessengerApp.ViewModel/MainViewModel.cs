@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MessengerApp.ViewModel
 {
-    class MainViewModel
+    public class MainViewModel
     {
+        public Context _context;
+        public MainViewModel(Context context)
+        {
+            _context = context;
+        }
     }
 }

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.BL", "Messenge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.Model", "MessengerApp.Model\MessengerApp.Model.csproj", "{5726C917-BC6F-418F-8BF4-2043AD324F60}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.DAL", "MessengerApp.DALL\MessengerApp.DAL.csproj", "{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.DAL", "MessengerApp.DAL\MessengerApp.DAL.csproj", "{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

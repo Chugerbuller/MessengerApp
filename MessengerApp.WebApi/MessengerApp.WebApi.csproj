@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MessengerApp.DALL\MessengerApp.DAL.csproj" />
+    <ProjectReference Include="..\MessengerApp.DAL\MessengerApp.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

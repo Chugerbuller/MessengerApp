@@ -1,4 +1,4 @@
-﻿using MessengerApp.DALL;
+﻿using MessengerApp.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +14,12 @@ public class PersonController : ControllerBase
         _dbContext = dbContextFactory.CreateDbContext();
     }
     [HttpGet("get-person/{id}")]
-    public async Task<IActionResult> GetPerson(Guid id)
+    public async Task<IActionResult> GetPersonAsync(Guid id)
     {
         var person = await _dbContext.Persons.FirstOrDefaultAsync(p => p.Id == id);
         if (person == null)
             return NotFound();
         return Ok(person);
     }
+    
 }

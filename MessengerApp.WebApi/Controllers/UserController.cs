@@ -1,4 +1,4 @@
-using MessengerApp.DALL;
+using MessengerApp.DAL;
 using MessengerApp.Model;
 using MessengerApp.WebApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("authorize-user/{login}/{password}")]
-    public async Task<IActionResult> AuthorizeUser(string login, string password)
+    public async Task<IActionResult> AuthorizeUserAsync(string login, string password)
     {
         var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Login == login);
 

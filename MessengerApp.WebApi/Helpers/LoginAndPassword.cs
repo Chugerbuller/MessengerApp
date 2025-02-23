@@ -1,8 +1,7 @@
-﻿namespace MessengerApp.WebApi.Helpers
+﻿namespace MessengerApp.WebApi.Helpers;
+
+public class LoginAndPassword
 {
-    public class LoginAndPassword
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-    }
+    public string Login { get; set; }
+    public string Password { get; set; }
 }

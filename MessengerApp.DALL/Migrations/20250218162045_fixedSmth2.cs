@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MessengerApp.DALL.Migrations
+namespace MessengerApp.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class fixedSmth2 : Migration

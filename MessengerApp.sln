@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.WebApi", "MessengerApp.WebApi\MessengerApp.WebApi.csproj", "{7258DB12-18B6-4D48-AD65-1BE841D03D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.WebApi", "MessengerApp.WebApi\MessengerApp.WebApi.csproj", "{7258DB12-18B6-4D48-AD65-1BE841D03D24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.BL", "MessengerApp.BL\MessengerApp.BL.csproj", "{0638C518-C275-4ADB-97A3-AE7FE77DED62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.BL", "MessengerApp.BL\MessengerApp.BL.csproj", "{0638C518-C275-4ADB-97A3-AE7FE77DED62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.Model", "MessengerApp.Model\MessengerApp.Model.csproj", "{5726C917-BC6F-418F-8BF4-2043AD324F60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.Model", "MessengerApp.Model\MessengerApp.Model.csproj", "{5726C917-BC6F-418F-8BF4-2043AD324F60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerApp.DALL", "MessengerApp.DALL\MessengerApp.DALL.csproj", "{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerApp.DAL", "MessengerApp.DALL\MessengerApp.DAL.csproj", "{FF9ABA7B-52FB-4AC9-AF57-B564EB4D185B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

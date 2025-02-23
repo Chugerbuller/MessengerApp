@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MessengerApp.DALL.Migrations
+namespace MessengerApp.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class fixPerson : Migration

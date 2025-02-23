@@ -1,4 +1,4 @@
-﻿using MessengerApp.DALL;
+﻿using MessengerApp.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,17 +21,5 @@ public class PersonController : ControllerBase
             return NotFound();
         return Ok(person);
     }
-    [HttpDelete("delete-user-from-chat/{chatId}/{personId}")]
-    public async Task<IActionResult> DeletePersonFromChatAsync(Guid chatId, Guid personId)
-    {
-        var chat = await _dbContext.PersonsInChat.FirstOrDefaultAsync(c => c.ChatId == chatId && c.PersonId == personId);
-
-        if (chat == null)
-            return NotFound();
-
-        _dbContext.PersonsInChat.Remove(chat);
-        await _dbContext.SaveChangesAsync();
-
-        return Ok();
-    }
+    
 }

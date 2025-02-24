@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="280" Width="420">
+        Title="LoginWindow" Height="280" Width="420"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="Screen">
             <Style.Setters>
@@ -83,7 +84,7 @@
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="Password" Style="{StaticResource LabelTextBlock}" />
-                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="LoginPasswordBox" PasswordChanged="PasswordChangedHandler"/>
+                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="LoginPasswordTextBox" PasswordChanged="PasswordChangedHandler"/>
                 </DockPanel>
                 <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="LoginButton"
                         Command="{Binding LoginCommand}"/>

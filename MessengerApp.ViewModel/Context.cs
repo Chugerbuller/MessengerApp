@@ -7,10 +7,12 @@ namespace MessengerApp.ViewModel
     {
         public User? AutorizedUser { get; set; }
         public ApiServiceLoginAndAuthorize apiLAU { get; set; }
+        public ApiServiceMessage serviceMessage { get; set; }
 
         public Context()
         {
             apiLAU = new ApiServiceLoginAndAuthorize();
+            serviceMessage = new ApiServiceMessage();
         }
     }
 }

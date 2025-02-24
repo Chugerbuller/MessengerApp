@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
         Title="Messenger" Height="640" Width="830"
-        Background="#8ce3ff">
+        Background="#8ce3ff"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="TextBlockBase">
             <Style.Setters>
@@ -146,12 +147,12 @@
         />
         <TextBox Grid.Row="2" Grid.Column="4"
             x:Name="InputMessage"
-            Text=""
+            Text="{Binding message.Message.MessageContent}"
             Style="{StaticResource TexBoxMessage}"
         />
         <Button Grid.Row="2" Grid.Column="5"
             Content="Отправить"
-            Command=""
+            Command="{Binding AddMessageInChat}"
             Style="{StaticResource ButtonMessage}"
         />
     </Grid>

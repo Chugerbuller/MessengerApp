@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="350" Width="500">
+        Title="RegistrationWindow" Height="350" Width="500"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="Screen">
             <Style.Setters>
@@ -74,21 +75,21 @@
                 <TextBlock Text="Registration" Style="{StaticResource HeaderBlock}" />
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="FirstName" Style="{StaticResource SubscriptTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="FirstNameBox" />
+                    <TextBox Style="{StaticResource TextBoxBase}" Name="FirstNameTextBox" Text="{Binding User.Person.FirstName}" />
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="LastName" Style="{StaticResource SubscriptTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="LastNameBox" />
+                    <TextBox Style="{StaticResource TextBoxBase}" Name="LastNameTextBox" Text="{Binding User.Person.LastName}" />
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="UserName" Style="{StaticResource SubscriptTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="RegisterBox" />
+                    <TextBox Style="{StaticResource TextBoxBase}" Name="RegisterTextBox" Text="{Binding User.Login}"/>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Center">
                     <TextBlock Text="Password" Style="{StaticResource SubscriptTextBlock}" />
-                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="RegisterPasswordBox"/>
+                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="RegisterPasswordTextBox" PasswordChanged="RegisterPasswordTextBox_PasswordChanged"/>
                 </DockPanel>
-                <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="RegisterButton"/>
+                <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="RegisterButton" Command="{Binding RegisterCommand}"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -11,28 +11,37 @@ namespace MessengerApp.View
     public partial class LoginWindow : Window
     {
         public Context _context;
+        public LoginViewModel loginViewModel;
         public LoginWindow(Context context)
         {
             InitializeComponent();
             _context = context;
-            DataContext = new LoginViewModel(_context);
+            loginViewModel = new LoginViewModel(_context);
+            DataContext = loginViewModel;
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow(_context);
             this.Close();
-            registrationWindow.ShowDialog();
+            registrationWindow.Show();
+        }
 
-            if (registrationWindow.DialogResult == true)
-            {
-                MainWindow mainWindow = new MainWindow(_context);
-                mainWindow.Show();
-            }
+        public void EnterLogin(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(async () => {
+                var result = await loginViewModel.Login();
+                if (result == true)
+                {
+                    MainWindow mainWindow = new MainWindow(_context);
+                    this.Close();
+                    mainWindow.Show();
+                }
+            });
         }
         void PasswordChangedHandler(Object sender, RoutedEventArgs args)
         {
-            _context.AutorizedUser.Password = ((PasswordBox)sender).Password;
+            loginViewModel.password = ((PasswordBox)sender).Password;
         }
 
     }

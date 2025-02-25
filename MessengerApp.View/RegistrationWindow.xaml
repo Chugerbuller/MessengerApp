@@ -89,7 +89,7 @@
                     <TextBlock Text="Password" Style="{StaticResource SubscriptTextBlock}" />
                     <PasswordBox Style="{StaticResource TextBoxBase}" Name="RegisterPasswordTextBox" PasswordChanged="RegisterPasswordTextBox_PasswordChanged"/>
                 </DockPanel>
-                <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="RegisterButton" Command="{Binding RegisterCommand}"/>
+                <Button IsDefault="False" Content="Enter" Style="{StaticResource ButtonBase}" Name="RegisterButton" Click="EnterRegistration"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -17,13 +17,13 @@ namespace MessengerApp.ViewModel.Utils
         {
             _httpClient = new HttpClient()
             {
-                BaseAddress = new Uri("https://localhost:7259/messenger")
+                BaseAddress = new Uri("https://localhost:7259/messenger-api/")
             };
         }
 
         public async Task<User> AutorizeUserAsync(string login, string password)
         {
-            HttpResponseMessage responce = await _httpClient.GetAsync($"autorize-user/{login}/{password}");
+            HttpResponseMessage responce = await _httpClient.GetAsync($"User/authorize-user/{login}/{password}");
             
             if(responce.IsSuccessStatusCode)
             {
@@ -40,21 +40,16 @@ namespace MessengerApp.ViewModel.Utils
             }
         }
 
-        public async Task<User> CreateUserAsync(User newUser)
+        public async Task<bool> CreateUserAsync(User newUser)
         {
-            HttpResponseMessage responce = await _httpClient.PostAsJsonAsync($"create-user", newUser);
+            HttpResponseMessage responce = await _httpClient.PostAsJsonAsync("User/create-user/", newUser);
             if(responce.IsSuccessStatusCode)
             {
-                var user = await responce.Content.ReadFromJsonAsync<User>();
-                if (user == null)
-                {
-                    throw new Exception("Не удалось зарегистрироваться!");
-                }
-                return user;
+                return true;
             }
             else
             {
-                throw new HttpRequestException(await responce.Content.ReadAsStringAsync());
+                throw new HttpRequestException("Не удалось создать пользователя!");
             }
         }
     }

@@ -15,13 +15,7 @@ public partial class App : Application
     {
         base.OnStartup(e);
         LoginWindow loginWindow = new LoginWindow(context);
-        loginWindow.ShowDialog();
-
-        if (loginWindow.DialogResult == true)
-        {
-            MainWindow mainWindow = new MainWindow(context);
-            mainWindow.Show();
-        }
+        loginWindow.Show();
     }
 }
 

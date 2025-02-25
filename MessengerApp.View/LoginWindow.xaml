@@ -87,7 +87,7 @@
                     <PasswordBox Style="{StaticResource TextBoxBase}" Name="LoginPasswordTextBox" PasswordChanged="PasswordChangedHandler"/>
                 </DockPanel>
                 <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="LoginButton"
-                        Command="{Binding LoginCommand}"/>
+                       Click="EnterLogin"/>
                 <TextBlock Text="No account? Register!" Style="{StaticResource SubscriptTextBlock}" MouseDown="TextBlock_MouseDown"/>
             </StackPanel>
         </Border>

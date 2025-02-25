@@ -34,7 +34,7 @@ public class LoginAndPasswordValidation
 
         foreach (var sym in _rules.Numbers)
             if (password.Contains(sym))
-                checkSymbols = true;
+                checkNumbers = true;
 
         var checkUpperCase = false;
         var checkLowerCase = false;

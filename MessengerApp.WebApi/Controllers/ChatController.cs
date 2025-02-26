@@ -35,13 +35,15 @@ public class ChatController : ControllerBase
         if (user == null)
             return NotFound();
 
-        var res = await _dbContext.PersonsInChat.Where(pic => pic.PersonId == user.PersonID).ToListAsync();
+        var res = await _dbContext.PersonsInChat.Where(pic => pic.PersonId == user.Id).ToListAsync();
 
         if (res == null)
             return NotFound();
 
         return Ok(res);
-    } 
+    }
+
+    
 
     [HttpPost("update-chat-name/{chatId}/{chatNewName}")]
     public async Task<IActionResult> PostUpdateChatAsync(Guid chatId, string chatNewName)

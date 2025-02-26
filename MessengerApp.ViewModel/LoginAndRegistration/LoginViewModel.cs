@@ -36,7 +36,7 @@ namespace MessengerApp.ViewModel.LoginAndRegistration
                             "Пароль должен содержать хотя бы одну цифру, один символ в верхнем регистре и один символ в нижнем регистре");
                     }
                     User user = await _context.apiLAU.AutorizeUserAsync(login, password);
-                    _context.AutorizedUser = user;
+                    _context.AuthorizedUser = user;
                     return true; 
                 }
                 else

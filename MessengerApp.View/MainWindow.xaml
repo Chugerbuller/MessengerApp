@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerApp.View"
         mc:Ignorable="d"
-        Title="Messenger" Height="640" Width="830"
+        Title="Messenger" Height="640" Width="840"
         Background="#8ce3ff"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -39,24 +39,45 @@
                 <Setter Property="TextBlock.Margin" Value="0" />
             </Style.Setters>
         </Style>
-        <Style x:Key="ButtonMenu">
+        <Style x:Key="ButtonLogOut">
             <Style.Setters>
                 <Setter Property="Button.Margin" Value="5" />
                 <Setter Property="Button.Background" Value="#8ce3ff" />
                 <Setter Property="Button.Foreground" Value="#2E88A6" />
-                <Setter Property="Button.FontSize" Value="14"/>
+                <Setter Property="Button.FontSize" Value="13"/>
                 <Setter Property="Button.FontFamily" Value="Tahoma"/>
                 <Setter Property="Button.BorderBrush" Value="#8ce3ff"/>
                 <Setter Property="Button.BorderThickness" Value="2"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="Button">
+            <Style.Setters>
+                <Setter Property="Button.Margin" Value="10,20,10,10" />
+                <Setter Property="Button.Background" Value="#8ce3ff" />
+                <Setter Property="Button.Foreground" Value="#2E88A6" />
+                <Setter Property="Button.FontSize" Value="12"/>
+                <Setter Property="Button.FontFamily" Value="Tahoma"/>
+                <Setter Property="Button.BorderBrush" Value="#8ce3ff"/>
+                <Setter Property="Button.BorderThickness" Value="2"/>
+            </Style.Setters>
+        </Style>
+
         <Style x:Key="TextBlockSearch">
             <Style.Setters>
-                <Setter Property="TextBlock.Padding" Value="5"/>
                 <Setter Property="TextBlock.Margin" Value="5" />
                 <Setter Property="TextBlock.Foreground" Value="#2E88A6"/>
                 <Setter Property="TextBlock.FontFamily" Value="Tahoma"/>
                 <Setter Property="TextBlock.FontSize" Value="14" />
+                <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="TextBlockUserName" >
+            <Style.Setters>
+                <Setter Property="TextBlock.Padding" Value="5"/>
+                <Setter Property="TextBlock.Margin" Value="5" />
+                <Setter Property="TextBlock.Foreground" Value="#0F556C"/>
+                <Setter Property="TextBlock.FontFamily" Value="Tahoma"/>
+                <Setter Property="TextBlock.FontSize" Value="12" />
                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
             </Style.Setters>
         </Style>
@@ -94,43 +115,51 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="0.45*"/>
             <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockUserName}"
+            Text="{Binding  User.Login}" TextWrapping="Wrap"/>
+        <Button Grid.Row="0" Grid.Column="1"  Style="{StaticResource ButtonLogOut}">
+            <TextBlock Text="Выход из аккаунта" TextWrapping="Wrap" />
+        </Button>
 
-        <Button Content="Меню" Style="{StaticResource ButtonMenu}"/>
-        <TextBlock Text="Поиск" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockSearch}" />
-        <TextBox Grid.Row="0" Grid.Column="2" Margin="10"/>
+        <TextBlock Text="Поиск" Grid.Row="0" Grid.Column="2" Style="{StaticResource TextBlockSearch}" />
+        <TextBox Grid.Row="0" Grid.Column="3" Margin="10"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5">
-            <ScrollViewer Name="scroll" CanContentScroll="True" Height="560"/>
-            <ListView>
-                <ListView.View>
-                    <GridView>
-
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="5">
+            <ScrollViewer Name="scroll" CanContentScroll="True" Height="490">
+                <ListBox ItemsSource="{Binding Chats}" SelectedItem="{Binding selectedChat, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ChatName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            <Button x:Name="AddChats" Content="Добавить чат" Style="{StaticResource Button}"/>
         </StackPanel>
 
-        <Border Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
+        <Border Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
             <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
-                     Style="{StaticResource MessagesList}" Name="MessagesList" Focusable="False">
+                     Style="{StaticResource MessagesList}" Name="MessagesList" Focusable="False"
+                     ItemsSource="{Binding Messages}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <ListBoxItem>
                             <Border Style="{StaticResource MessageBorder}" HorizontalAlignment="{Binding Alignment}">
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="" Style="{StaticResource MessageText}"/>
+                                    <TextBlock Text="{Binding Message.MessageContent}" Style="{StaticResource MessageText}"/>
                                 </StackPanel>
                             </Border>
                         </ListBoxItem>
@@ -139,20 +168,20 @@
             </ListBox>
         </Border>
 
-        <Label Grid.Row="2" Grid.Column="3"
+        <Label Grid.Row="2" Grid.Column="4"
             Content="Сообщение"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-               Style="{StaticResource Label}"
+            HorizontalAlignment="Right"
+               Style="{StaticResource Label}" Margin="0,0,5,0"
         />
-        <TextBox Grid.Row="2" Grid.Column="4"
+        <TextBox Grid.Row="2" Grid.Column="5"
             x:Name="InputMessage"
-            Text="{Binding message.Message.MessageContent}"
+            Text="{Binding Message}"
             Style="{StaticResource TexBoxMessage}"
         />
-        <Button Grid.Row="2" Grid.Column="5"
+        <Button Grid.Row="2" Grid.Column="6"
             Content="Отправить"
-            Command="{Binding AddMessageInChat}"
+            Command="{Binding AddMessageInChatCommand}"
             Style="{StaticResource ButtonMessage}"
         />
     </Grid>

@@ -16,36 +16,45 @@ namespace MessengerApp.ViewModel.Utils
         {
             _httpClient = new HttpClient()
             {
-                BaseAddress = new Uri("https://localhost:7259/messenger")
+                BaseAddress = new Uri("https://localhost:7259/messenger-api/")
             };
         }
-        public async Task AddMessageInChatAsync(Chat chat, Message message)
+        public async Task<MessagesInChat> AddMessageInChatAsync(Chat chat, Message message)
         {
             var msgInChat = (chat, message);
-            var response = await _httpClient.PostAsJsonAsync("messenger-api/messages/add-message-in-chat", msgInChat);
+            var response = await _httpClient.PostAsJsonAsync("Messages/add-message-in-chat", msgInChat);
 
             if (response.IsSuccessStatusCode)
             {
-                var result = await response.Content.ReadFromJsonAsync<MessagesInChat>();
-                Console.WriteLine("Message added successfully.");
+                var returnMessage = await response.Content.ReadFromJsonAsync<MessagesInChat>();
+                if (returnMessage != null)
+                {
+                    throw new Exception($"Не удалось получить данные!");
+                }
+                return returnMessage;
             }
             else
             {
-                Console.WriteLine($"Error: {response.StatusCode}");
+                throw new Exception($"Error: {response.StatusCode}");
             }
         }
-        public async Task GetAllMessagesInChatAsync(Guid chatId)
+        public async Task<List<MessagesInChat>> GetAllMessagesInChatAsync(Guid chatId)
         {
-            var response = await _httpClient.GetAsync($"messenger-api/messages/get-all-msg/{chatId}");
+            var response = await _httpClient.GetAsync($"Messages/get-all-msg/{chatId}");
 
             if (response.IsSuccessStatusCode)
             {
                 var messages = await response.Content.ReadFromJsonAsync<List<MessagesInChat>>();
-                Console.WriteLine("Messages retrieved successfully.");
+
+                if(messages!= null)
+                {
+                    return new List<MessagesInChat>();
+                }
+                return messages;
             }
             else
             {
-                Console.WriteLine($"Error: {response.StatusCode}");
+                throw new Exception($"Error: {response.StatusCode}");
             }
         }
     }

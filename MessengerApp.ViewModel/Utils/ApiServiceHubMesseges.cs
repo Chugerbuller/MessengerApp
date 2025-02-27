@@ -33,12 +33,11 @@ namespace MessengerApp.ViewModel.Utils
         {
             await client.StopAsync();
         }
-
         public void SubscribeOnMessages(ReceiveMessage receiveMessage)
         {
             client.On<MessagesInChat>("ReciveMsg", (msg) =>
             {
-                receiveMessage(msg);
+                  receiveMessage(msg);
             });
         }
 

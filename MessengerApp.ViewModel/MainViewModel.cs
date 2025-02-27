@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reactive;
+using System.Text.Json;
 using System.Windows;
 
 namespace MessengerApp.ViewModel
@@ -27,11 +28,17 @@ namespace MessengerApp.ViewModel
             _context = context;
             User = _context.AuthorizedUser;
             Chats = new ObservableCollection<Chat>();
+            Messages = new ObservableCollection<MessagesInChat>();
             LoadChatsAsync();
 
             this.WhenAnyValue(x => x.selectedChat)
                .Subscribe(async chat =>
                {
+                   if (Messages != null)
+                   {
+                       Messages.Clear();
+                   }
+
                    if (chat != null)
                    {
                        await _context.serviceHubMessage.EnterInChat(chat.Id);
@@ -39,17 +46,15 @@ namespace MessengerApp.ViewModel
                        await GetAllMessagesInChat();
                    }
                    else
-                   {
-                       if(Messages != null)
-                       { 
-                           Messages.Clear();
-                       }
+                   { 
                        await _context.serviceHubMessage.Disconnection();
                    }
+
                });
 
             AddMessageInChatCommand = ReactiveCommand.CreateFromTask(AddMessageInChat);
         }
+
         //<Chats>
         private async Task LoadChatsAsync()
         {
@@ -77,28 +82,41 @@ namespace MessengerApp.ViewModel
         {
             try
             {
-                if (Message == null)
+                await _context.serviceMessage.AddMessageInChatAsync(selectedChat, new Model.Message
                 {
-                    throw new Exception("Сообщение пустое!");
-                }
+                    MessageContent = Message,
+                    PersonId = _context.AuthorizedUser.PersonID
+                });
 
-                MessagesInChat NewMessage = new MessagesInChat
-                {
-                    ChatId = selectedChat.Id,
-                    Message = new Model.Message
-                    {
-                        MessageContent = Message,
-                        PersonId = _context.AuthorizedUser.PersonID
-                    }
-                };
-
-                await _context.serviceHubMessage.SendMessage(NewMessage);
-                // Messages.Add(NewMessage);
-            }
-            catch(Exception e)
+                MessageBox.Show("Сообщение отправлено успешно!");
+            } catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "error");
             }
+            //try
+            //{
+            //    if (Message == null)
+            //    {
+            //        throw new Exception("Сообщение пустое!");
+            //    }
+
+            //    MessagesInChat NewMessage = new MessagesInChat
+            //    {
+            //        ChatId = selectedChat.Id,
+            //        Message = new Model.Message
+            //        {
+            //            MessageContent = Message,
+            //            PersonId = _context.AuthorizedUser.PersonID,                      
+            //        }
+            //    };
+
+            //    await _context.serviceHubMessage.SendMessage(NewMessage);
+            //    /*Messages.Add(NewMessage);*/
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.Message);
+            //}
         }
         private async Task GetAllMessagesInChat()
         {
@@ -110,19 +128,20 @@ namespace MessengerApp.ViewModel
                     throw new Exception("Не удалось получить список сообщений!");
                 }
 
-                Messages = new ObservableCollection<MessagesInChat>(messagesInChat);
+                foreach (var item in messagesInChat)
+                {
+                    Messages.Add(item);
+                }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }    
         }
-
-        //</Message>
-
         public void ReceiveMessage(MessagesInChat message)
         {
-            Messages.Add(message);
+             Messages.Add(message);
         }
+        //</Message>
     }
 }

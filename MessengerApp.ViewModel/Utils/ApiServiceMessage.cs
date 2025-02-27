@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MessengerApp.ViewModel.Utils
@@ -46,7 +47,7 @@ namespace MessengerApp.ViewModel.Utils
             {
                 var messages = await response.Content.ReadFromJsonAsync<List<MessagesInChat>>();
 
-                if(messages!= null)
+                if(messages == null)
                 {
                     return new List<MessagesInChat>();
                 }

@@ -2,11 +2,7 @@
 using MessengerApp.WebApi.Helpers;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Reactive;
-using System.Runtime.Intrinsics.X86;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace MessengerApp.ViewModel.LoginAndRegistration
 {

@@ -10,9 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.*" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.*" />
-    <PackageReference Include="NuGet.Protocol" Version="6.*" />
     <PackageReference Include="ReactiveUI" Version="20.*" />
-    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.*" />
   </ItemGroup>
 
   <ItemGroup>

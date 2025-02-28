@@ -1,14 +1,8 @@
-﻿using DynamicData;
-using DynamicData.Binding;
-using MessengerApp.Model;
-using NuGet.Protocol.Plugins;
+﻿using MessengerApp.Model;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Reactive;
-using System.Text.Json;
 using System.Windows;
 
 namespace MessengerApp.ViewModel
@@ -80,43 +74,45 @@ namespace MessengerApp.ViewModel
         //<Message>
         private async Task AddMessageInChat()
         {
+            /*  try
+              {
+                  await _context.serviceMessage.AddMessageInChatAsync(selectedChat, new Model.Message
+                  {
+                      MessageContent = Message,
+                      PersonId = _context.AuthorizedUser.PersonID
+                  });
+
+                  MessageBox.Show("Сообщение отправлено успешно!");
+              } catch (Exception e)
+              {
+                  MessageBox.Show(e.Message, "error");
+              }
+            */
+
             try
             {
-                await _context.serviceMessage.AddMessageInChatAsync(selectedChat, new Model.Message
+                if (Message == null)
                 {
-                    MessageContent = Message,
-                    PersonId = _context.AuthorizedUser.PersonID
-                });
+                    throw new Exception("Сообщение пустое!");
+                }
 
-                MessageBox.Show("Сообщение отправлено успешно!");
-            } catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "error");
+                MessagesInChat NewMessage = new MessagesInChat
+                {
+                    ChatId = selectedChat.Id,
+                    Message = new Message
+                    {
+                        MessageContent = Message,
+                        PersonId = _context.AuthorizedUser.PersonID,
+                    }
+                };
+
+                await _context.serviceHubMessage.SendMessage(NewMessage);
+                /*Messages.Add(NewMessage);*/
             }
-            //try
-            //{
-            //    if (Message == null)
-            //    {
-            //        throw new Exception("Сообщение пустое!");
-            //    }
-
-            //    MessagesInChat NewMessage = new MessagesInChat
-            //    {
-            //        ChatId = selectedChat.Id,
-            //        Message = new Model.Message
-            //        {
-            //            MessageContent = Message,
-            //            PersonId = _context.AuthorizedUser.PersonID,                      
-            //        }
-            //    };
-
-            //    await _context.serviceHubMessage.SendMessage(NewMessage);
-            //    /*Messages.Add(NewMessage);*/
-            //}
-            //catch (Exception e)
-            //{
-            //    MessageBox.Show(e.Message);
-            //}
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         private async Task GetAllMessagesInChat()
         {
@@ -142,6 +138,7 @@ namespace MessengerApp.ViewModel
         {
              Messages.Add(message);
         }
-        //</Message>
+        //</Message>  
+
     }
 }

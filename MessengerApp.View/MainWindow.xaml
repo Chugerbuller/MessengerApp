@@ -130,7 +130,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockUserName}"
             Text="{Binding  User.Login}" TextWrapping="Wrap"/>
-        <Button Grid.Row="0" Grid.Column="1"  Style="{StaticResource ButtonLogOut}">
+        <Button Grid.Row="0" Grid.Column="1"  Style="{StaticResource ButtonLogOut}" Click="LogOut">
             <TextBlock Text="Выход из аккаунта" TextWrapping="Wrap" />
         </Button>
 

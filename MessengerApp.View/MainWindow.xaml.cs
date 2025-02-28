@@ -15,4 +15,11 @@ public partial class MainWindow : Window
         _context = context;
         DataContext = new MainViewModel(_context);
     }
+    public void LogOut(object sender, RoutedEventArgs e)
+    {
+        _context.AuthorizedUser = null;
+        LoginWindow login = new LoginWindow(_context);
+        this.Close();
+        login.Show();
+    }
 }

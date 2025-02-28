@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ReactiveUI.WPF" Version="20.1.63" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MessengerApp.ViewModel\MessengerApp.ViewModel.csproj" />
   </ItemGroup>
 

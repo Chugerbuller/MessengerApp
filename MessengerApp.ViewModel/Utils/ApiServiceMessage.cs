@@ -22,7 +22,7 @@ namespace MessengerApp.ViewModel.Utils
             if (response.IsSuccessStatusCode)
             {
                 var returnMessage = await response.Content.ReadFromJsonAsync<MessagesInChat>();
-                if (returnMessage != null)
+                if (returnMessage == null)
                 {
                     throw new Exception($"Не удалось получить данные!");
                 }

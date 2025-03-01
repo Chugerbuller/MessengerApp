@@ -14,25 +14,22 @@ namespace MessengerApp.ViewModel.Utils
                         .Build();
             
         }
-        public async Task EnterInChat(Guid Id)
+        public async Task EnterInChat(Guid personId)
         {
             if(client.State != HubConnectionState.Connected)
             {
                 await client.StartAsync();
             }
 
-            await client.InvokeAsync("EnterInMessenger", Id);
+            await client.InvokeAsync("EnterInMessenger", personId);
         }
         public async Task Disconnection()
         {
             await client.StopAsync();
         }
-        public void SubscribeOnMessages(ReceiveMessage receiveMessage)
+        public void SubscribeOnMessages(Action<MessagesInChat> receiveMessage)
         {
-            client.On<MessagesInChat>("ReciveMsg", (msg) =>
-            {
-                  receiveMessage(msg);
-            });
+            client.On<MessagesInChat>("ReciveMsg", receiveMessage);
         }
 
         public async Task SendMessage(MessagesInChat msgInChat)

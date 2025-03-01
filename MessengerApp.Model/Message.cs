@@ -6,7 +6,7 @@ public class Message
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string MessageContent { get; set; }
-    public DateTime Created { get; set; } = DateTime.Now;
+    public DateTime Created { get; set; } = DateTime.UtcNow;
     public Guid PersonId { get; set; }
     public Person Person { get; set; }
     [JsonIgnore]

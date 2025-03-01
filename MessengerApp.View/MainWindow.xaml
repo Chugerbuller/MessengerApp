@@ -33,6 +33,16 @@
                 <Setter Property="Border.Padding" Value="2" />
             </Style.Setters>
         </Style>
+        <Style x:Key="MessagePersonNameText">
+            <Style.Setters>
+                <Setter Property="TextBlock.Padding" Value="5"/>
+                <Setter Property="TextBlock.Margin" Value="5" />
+                <Setter Property="TextBlock.Foreground" Value="#0F556C" />
+                <Setter Property="TextBlock.FontSize" Value="10" />
+                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                <Setter Property="TextBlock.Margin" Value="0" />
+            </Style.Setters>
+        </Style>
         <Style x:Key="MessageText" BasedOn="{StaticResource TextBlockBase}">
             <Style.Setters>
                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -154,7 +164,10 @@
         <Button x:Name="AddPersonInChat" Grid.Row="0" Grid.Column="4" Style="{StaticResource ButtonLogOut}" Click="AddPersonInChat_Click">
             <TextBlock Text="Add Person In Chat" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
-
+        <Button x:Name="LogOutInChat" Grid.Row="0" Grid.Column="6" Style="{StaticResource ButtonLogOut}" Click="LogOutInChat_Click">
+            <TextBlock Text="Logout In Chat" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
+        
         <Border Grid.Column="4" Grid.Row="1"  Grid.ColumnSpan="3" Margin="5,10,5,5">
             <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
                      Style="{StaticResource MessagesList}" Name="MessagesList" Focusable="False"
@@ -164,6 +177,7 @@
                         <ListBoxItem>
                             <Border Style="{StaticResource MessageBorder}" HorizontalAlignment="{Binding Alignment}">
                                 <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Message.Person.FirstName}" Style="{StaticResource MessagePersonNameText}"/>
                                     <TextBlock Text="{Binding Message.MessageContent}" Style="{StaticResource MessageText}"/>
                                 </StackPanel>
                             </Border>

@@ -94,20 +94,6 @@ namespace MessengerApp.ViewModel
         //<Message>
         private async Task AddMessageInChat()
         {
-            /*  try
-              {
-                  await _context.serviceMessage.AddMessageInChatAsync(selectedChat, new Model.Message
-                  {
-                      MessageContent = Message,
-                      PersonId = _context.AuthorizedUser.PersonID
-                  });
-
-                  MessageBox.Show("Сообщение отправлено успешно!");
-              } catch (Exception e)
-              {
-                  MessageBox.Show(e.Message, "error");
-              }
-            */
             if(selectedChat != null)
             { 
                 try

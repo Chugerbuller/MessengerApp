@@ -2,6 +2,7 @@
 using MessengerApp.ViewModel;
 using MessengerApp.View.ChatView;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace MessengerApp.View;
 
@@ -33,7 +34,7 @@ public partial class MainWindow : Window
     }
     private void AddChats_Click(object sender, RoutedEventArgs e)
     {
-        if(_context.AuthorizedUser == null)
+        if(_context.AuthorizedUser != null)
         {
             AddChatWindow addChatWindow = new AddChatWindow(_context, mainViewModel.RefreshChats);
             addChatWindow.ShowDialog();
@@ -41,18 +42,33 @@ public partial class MainWindow : Window
     }
     private void AddPersonInChat_Click(object sender, RoutedEventArgs e)
     {
-        try
+
+        if (mainViewModel.selectedChat != null)
         {
-            if (mainViewModel.selectedChat == null)
-            {
-                throw new Exception("Чат не выбран! Выберите чат в который нужно добавить пользователя!");
-            }
             AddPersonInChatWindow addPersonInChatWindow = new AddPersonInChatWindow(_context, mainViewModel.selectedChat);
             addPersonInChatWindow.ShowDialog();
         }
-        catch(Exception ex)
+        else
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show("Поле пустое! Введите Person Id!");
+        }
+    }
+    private async void LogOutInChat_Click(object sender, RoutedEventArgs e)
+    {
+        if (mainViewModel.selectedChat != null)
+        {
+            var rezult = await _context.serviceChats.DeletePersonInChatAsync(mainViewModel.selectedChat.Id, _context.AuthorizedUser.PersonID);
+            MessageBox.Show("Пользователь успешно вышел из чата!");
+            await mainViewModel.LoadChatsAsync();
+
+            if (rezult == false)
+            {
+                MessageBox.Show("Не удалось выйти из чата!");
+            }
+        }
+        else
+        {
+            MessageBox.Show("Чат не выбран! Выберите чат из которого хотите выйти!");
         }
     }
 }

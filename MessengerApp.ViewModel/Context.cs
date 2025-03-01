@@ -10,6 +10,7 @@ namespace MessengerApp.ViewModel
         public ApiServiceChats serviceChats { get; set; }
         public ApiServiceMessage serviceMessage { get; set; }
         public ApiServiceHubMesseges serviceHubMessage { get; set; }
+
         public Context()
         {
             apiLAU = new ApiServiceLoginAndAuthorize();

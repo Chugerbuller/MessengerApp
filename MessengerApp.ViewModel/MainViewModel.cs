@@ -4,6 +4,7 @@ using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace MessengerApp.ViewModel
 {
@@ -28,20 +29,23 @@ namespace MessengerApp.ViewModel
             this.WhenAnyValue(x => x.selectedChat)
                .Subscribe(async chat =>
                {
-                   if (Messages != null)
-                   {
-                       Messages.Clear();
-                   }
-
-                   if (chat != null)
-                   {
-                       await _context.serviceHubMessage.EnterInChat(chat.Id);
-                       _context.serviceHubMessage.SubscribeOnMessages(ReceiveMessage);
-                       await GetAllMessagesInChat();
-                   }
-                   else
+                   if(selectedChat != null)
                    { 
-                       await _context.serviceHubMessage.Disconnection();
+                       if (Messages != null)
+                       {
+                       Messages.Clear();
+                       }
+
+                       if (chat != null)
+                       {
+                           await _context.serviceHubMessage.EnterInChat(_context.AuthorizedUser.PersonID);
+                           _context.serviceHubMessage.SubscribeOnMessages(ReceiveMessage);
+                           await GetAllMessagesInChat();
+                       }
+                       else
+                       {
+                           await _context.serviceHubMessage.Disconnection();
+                       }
                    }
 
                });
@@ -50,23 +54,39 @@ namespace MessengerApp.ViewModel
         }
 
         //<Chats>
-        private async Task LoadChatsAsync()
+        public async Task LoadChatsAsync()
         {
-            if(_context.AuthorizedUser != null)
-            {  
-                var userId = _context.AuthorizedUser.Id;
-                var personInChats = await _context.serviceChats.GetAllUserChatsAsync(userId);
-
-                Chats.Clear();
-                foreach (var personInChat in personInChats)
+            try
+            {
+                if (_context.AuthorizedUser != null)
                 {
-                    var chat = await _context.serviceChats.GetChatAsync(personInChat.ChatId);
-                    if (chat != null)
+                    var userId = _context.AuthorizedUser.Id;
+                    var personInChats = await _context.serviceChats.GetAllUserChatsAsync(userId);
+
+                    Chats.Clear();
+                    foreach (var personInChat in personInChats)
                     {
-                        Chats.Add(chat);
+                        var chat = await _context.serviceChats.GetChatAsync(personInChat.ChatId);
+                        if (chat != null)
+                        {
+                            Chats.Add(chat);
+                        }
                     }
                 }
             }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        public async Task RefreshChats()
+        {
+            await Application.Current.Dispatcher.Invoke(async () => 
+            {
+                selectedChat = null;
+                await LoadChatsAsync();
+            });
+            
         }
         //</Chats>
 
@@ -88,33 +108,36 @@ namespace MessengerApp.ViewModel
                   MessageBox.Show(e.Message, "error");
               }
             */
-
-            try
-            {
-                if (Message == null)
+            if(selectedChat != null)
+            { 
+                try
                 {
-                    throw new Exception("Сообщение пустое!");
-                }
-
-                MessagesInChat NewMessage = new MessagesInChat
-                {
-                    ChatId = selectedChat.Id,
-                    Message = new Message
+                    if (Message == null)
                     {
-                        MessageContent = Message,
-                        PersonId = _context.AuthorizedUser.PersonID,
+                        throw new Exception("Сообщение пустое!");
                     }
-                };
 
-                await _context.serviceHubMessage.SendMessage(NewMessage);
-                /*Messages.Add(NewMessage);*/
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                    MessagesInChat NewMessage = new MessagesInChat
+                    {
+                        ChatId = selectedChat.Id,
+                        Message = new Message
+                        {
+                            MessageContent = Message,
+                            PersonId = _context.AuthorizedUser.PersonID,
+                        }
+                    };
+
+                    await _context.serviceHubMessage.SendMessage(NewMessage);
+                    Message = null;
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
             }
         }
-        private async Task GetAllMessagesInChat()
+        public async Task GetAllMessagesInChat()
         {
             try
             {
@@ -136,9 +159,10 @@ namespace MessengerApp.ViewModel
         }
         public void ReceiveMessage(MessagesInChat message)
         {
-             Messages.Add(message);
+            Application.Current.Dispatcher.Invoke(() => Messages.Add(message));
         }
         //</Message>  
+
 
     }
 }

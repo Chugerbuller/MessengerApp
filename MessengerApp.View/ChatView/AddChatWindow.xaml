@@ -1,11 +1,12 @@
-﻿<Window x:Class="MessengerApp.View.RegistrationWindow"
+﻿<Window x:Class="MessengerApp.View.ChatView.AddChatWindow"
+        x:Name="AddNewChatWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MessengerApp.View"
+        xmlns:local="clr-namespace:MessengerApp.View.ChatView"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="350" Width="500"
+        Title="AddNewChatWindow" Height="200" Width="370"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="Screen">
@@ -14,10 +15,10 @@
                 <Setter Property="Border.Background" Value="#8ce3ff" />
             </Style.Setters>
         </Style>
-        <Style x:Key="RegisterPanel">
+        <Style x:Key="AddChatPanel">
             <Style.Setters>
                 <Setter Property="StackPanel.Orientation" Value="Vertical" />
-                <Setter Property="StackPanel.VerticalAlignment" Value="Center"/>
+                <Setter Property="StackPanel.VerticalAlignment" Value="Center" />
             </Style.Setters>
         </Style>
         <Style x:Key="TextBoxBase">
@@ -28,27 +29,24 @@
                 <Setter Property="TextBox.Padding" Value="15 10"/>
                 <Setter Property="TextBox.HorizontalAlignment" Value="Center" />
                 <Setter Property="TextBox.Width" Value="250" />
-                <Setter Property="TextBox.BorderBrush" Value="#8ce3ff" />
-                <Setter Property="TextBox.BorderThickness" Value="2" />
             </Style.Setters>
         </Style>
         <Style x:Key="TextBlockBase">
             <Style.Setters>
-                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                <Setter Property="TextBlock.Padding" Value="5"/>
+                <Setter Property="TextBlock.Margin" Value="5" />
                 <Setter Property="TextBlock.Foreground" Value="#2E88A6" />
                 <Setter Property="TextBlock.FontSize" Value="14" />
             </Style.Setters>
         </Style>
-        <Style x:Key="HeaderBlock">
+        <Style x:Key="HeaderBlock" BasedOn="{StaticResource TextBlockBase}">
             <Style.Setters>
-                <Setter Property="TextBlock.Foreground" Value="#2E88A6" />
                 <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
                 <Setter Property="TextBlock.FontWeight" Value="Bold" />
-                <Setter Property="TextBlock.FontSize" Value="18"/>
-                <Setter Property="TextBlock.Margin" Value="10, 20"/>
+                <Setter Property="TextBlock.FontSize" Value="18" />
             </Style.Setters>
         </Style>
-        <Style x:Key="SubscriptTextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Style x:Key="LabelTextBlock" BasedOn="{StaticResource TextBlockBase}">
             <Style.Setters>
                 <Setter Property="TextBlock.HorizontalAlignment" Value="Right"/>
                 <Setter Property="TextBlock.FontWeight" Value="Normal" />
@@ -56,12 +54,20 @@
                 <Setter Property="TextBlock.Foreground" Value="#2E88A6" />
             </Style.Setters>
         </Style>
+        <Style x:Key="SubscriptTextBlock" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                <Setter Property="TextBlock.FontWeight" Value="Normal" />
+                <Setter Property="TextBlock.FontSize" Value="14" />
+                <Setter Property="TextBlock.Foreground" Value="#fc4929" />
+            </Style.Setters>
+        </Style>
         <Style x:Key="ButtonBase" >
             <Style.Setters>
                 <Setter Property="Button.Background" Value="#2E88A6" />
                 <Setter Property="Button.Foreground" Value="#8ce3ff" />
-                <Setter Property="Button.Margin" Value="10"/>
-                <Setter Property="Button.Padding" Value="40, 10"/>
+                <Setter Property="Button.Margin" Value="5"/>
+                <Setter Property="Button.Padding" Value="40 10"/>
                 <Setter Property="Button.HorizontalAlignment" Value="Center" />
                 <Setter Property="Button.FontSize" Value="14" />
                 <Setter Property="Button.BorderBrush" Value="#2E88A6" />
@@ -70,26 +76,14 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border Style="{StaticResource Screen}" Name="RegisterScreen" Visibility="Visible">
-            <StackPanel Style="{StaticResource RegisterPanel}">
-                <TextBlock Text="Registration" Style="{StaticResource HeaderBlock}" />
+        <Border Style="{StaticResource Screen}" Name="AddChatScreen" Visibility="Visible" Height="269" VerticalAlignment="Center">
+            <StackPanel Style="{StaticResource AddChatPanel}">
+                <TextBlock Text="Add new chat" Style="{StaticResource HeaderBlock}" />
                 <DockPanel HorizontalAlignment="Center">
-                    <TextBlock Text="FirstName" Style="{StaticResource SubscriptTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="FirstNameTextBox" Text="{Binding User.Person.FirstName}" />
+                    <TextBlock Text="ChatName" Style="{StaticResource LabelTextBlock}" />
+                    <TextBox Style="{StaticResource TextBoxBase}" Name="AddChatTextBox" Text="{Binding chatName}"/>
                 </DockPanel>
-                <DockPanel HorizontalAlignment="Center">
-                    <TextBlock Text="LastName" Style="{StaticResource SubscriptTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="LastNameTextBox" Text="{Binding User.Person.LastName}" />
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Center">
-                    <TextBlock Text="UserName" Style="{StaticResource SubscriptTextBlock}" />
-                    <TextBox Style="{StaticResource TextBoxBase}" Name="RegisterTextBox" Text="{Binding User.Login}"/>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Center">
-                    <TextBlock Text="Password" Style="{StaticResource SubscriptTextBlock}" />
-                    <PasswordBox Style="{StaticResource TextBoxBase}" Name="RegisterPasswordTextBox" PasswordChanged="RegisterPasswordTextBox_PasswordChanged"/>
-                </DockPanel>
-                <Button IsDefault="False" Content="Enter" Style="{StaticResource ButtonBase}" Name="RegisterButton" Click="EnterRegistration"/>
+                <Button Content="Enter" Style="{StaticResource ButtonBase}" Name="AddChatButton" Command="{Binding AddChatCommand}" CommandParameter="{Binding ElementName=AddNewChatWindow}"/>
             </StackPanel>
         </Border>
     </Grid>

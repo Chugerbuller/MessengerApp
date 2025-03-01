@@ -1,4 +1,5 @@
 ﻿using MessengerApp.Model;
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -23,7 +24,7 @@ namespace MessengerApp.ViewModel.Utils
             var personsInChats = await response.Content.ReadFromJsonAsync<List<PersonsInChat>>();
             if (personsInChats == null)
             {
-                throw new Exception("Не удалось получить данные!");
+                throw new InvalidOperationException("Не удалось получить список чатов!");
             }
             return personsInChats;
         }
@@ -35,9 +36,48 @@ namespace MessengerApp.ViewModel.Utils
             var chat = await response.Content.ReadFromJsonAsync<Chat>();
             if (chat == null)
             {
-                throw new Exception("Не удалось получить данные!");
+                throw new InvalidOperationException("Не удалось получить чат!");
             }
             return chat;
+        }
+        public async Task<Chat> AddChatAsync(Chat chat)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"Chat/create-chat", chat);
+            response.EnsureSuccessStatusCode();
+            
+            var newChat = await response.Content.ReadFromJsonAsync<Chat>();
+            if (newChat == null)
+            {
+                throw new InvalidOperationException("Не удалось создать чат!");
+            }
+            return newChat;
+
+        }
+        public async Task<PersonsInChat> AddPersonInChatAsync(Guid chatId, Guid personId)
+        {
+            var response = await _httpClient.PostAsync($"Chat/add-person/{chatId}/{personId}", null);
+            response.EnsureSuccessStatusCode();
+            var newPersonInChat = await response.Content.ReadFromJsonAsync<PersonsInChat>();
+            if(newPersonInChat == null)
+            {
+                throw new InvalidOperationException("Не удалось добавить пользователя в чат!");
+            }
+            return newPersonInChat;
+        }
+
+        public async Task<bool> DeletePersonInChatAsync(Guid chatId, Guid personId)
+        {
+            var response = await _httpClient.DeleteAsync($"Chat/delete-user-from-chat/{chatId}/{personId}");
+            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Не удалось удалить пользователя!");
+            }
+
         }
     }
 }

@@ -29,6 +29,7 @@ public class MessengerHub : Hub
     public async Task SendMsg(MessagesInChat message)
     {
         await _dbContext.MessagesInChat.AddAsync(message);
+        await _dbContext.SaveChangesAsync();
 
         await Clients.Group(message.ChatId.ToString())
                      .SendAsync(_messageDictionary.MethodsMap[Methods.ReciveMsg], message);

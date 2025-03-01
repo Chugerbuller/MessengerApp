@@ -46,7 +46,7 @@ public class MessagesController : ControllerBase
         if (chat == null)
             return NotFound();
 
-        var res = await _dbContext.MessagesInChat.Where(ch => ch.Id == chatId).ToListAsync();
+        var res = await _dbContext.MessagesInChat.Where(ch => ch.Chat.Id == chatId).ToListAsync();
 
         if (res == null)
             return NotFound();
